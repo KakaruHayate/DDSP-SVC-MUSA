@@ -1,6 +1,7 @@
 import os
 import argparse
 import torch
+import torch_musa
 
 from logger import utils
 from data_loaders import get_data_loaders
@@ -82,8 +83,8 @@ if __name__ == '__main__':
     loss_func = RSSLoss(args.loss.fft_min, args.loss.fft_max, args.loss.n_scale, device = args.device)
 
     # device
-    if args.device == 'cuda':
-        torch.cuda.set_device(args.env.gpu_id)
+    if args.device == 'musa':
+        torch.musa.set_device(args.env.gpu_id)
     model.to(args.device)
     
     for state in optimizer.state.values():

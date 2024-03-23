@@ -1,5 +1,6 @@
 import librosa
 import torch
+import torch_musa
 import torchaudio
 
 

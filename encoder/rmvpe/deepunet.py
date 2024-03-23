@@ -1,4 +1,5 @@
 import torch
+import torch_musa
 import torch.nn as nn
 from .constants import N_MELS
 

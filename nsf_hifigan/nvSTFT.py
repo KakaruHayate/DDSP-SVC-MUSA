@@ -3,6 +3,7 @@ import os
 os.environ["LRU_CACHE_CAPACITY"] = "3"
 import random
 import torch
+import torch_musa
 import torch.utils.data
 import numpy as np
 import librosa

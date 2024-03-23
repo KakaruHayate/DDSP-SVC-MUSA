@@ -7,6 +7,7 @@ import numpy as np
 from torch.nn import Conv1d
 from torch.nn import Mish
 import torch
+import torch_musa
 from torch import nn
 from tqdm import tqdm
 import math

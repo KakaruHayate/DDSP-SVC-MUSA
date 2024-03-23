@@ -1,3 +1,4 @@
+import torch_musa
 import torch.nn as nn
 
 

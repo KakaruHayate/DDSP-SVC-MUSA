@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 import sounddevice as sd
 import torch, librosa, threading, pickle
+import torch_musa
 from enhancer import Enhancer
 import numpy as np
 from torch.nn import functional as F
@@ -46,7 +47,7 @@ class SvcDDSP:
         self.k_step_max = 1000
 
     def update_model(self, ddsp_model_path, diff_model_path):
-        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.device = 'musa' if torch.musa.is_available() else 'cpu'
         
         # load ddsp model
         if self.ddsp_model is None or self.ddsp_model_path != ddsp_model_path:

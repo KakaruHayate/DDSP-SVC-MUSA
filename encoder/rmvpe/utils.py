@@ -2,6 +2,7 @@ import sys
 import numpy as np
 import librosa
 import torch
+import torch_musa
 from functools import reduce
 from .constants import *
 from torch.nn.modules.module import _addindent

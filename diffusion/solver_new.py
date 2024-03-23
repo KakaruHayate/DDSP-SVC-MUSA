@@ -2,11 +2,12 @@ import os
 import time
 import numpy as np
 import torch
+import torch_musa
 import librosa
 from logger.saver import Saver
 from logger import utils
 from torch import autocast
-from torch.cuda.amp import GradScaler
+from torch.musa.amp import GradScaler
 
 def test(args, model, vocoder, loader_test, saver):
     print(' [*] testing...')

@@ -1,4 +1,5 @@
 import torch
+import torch_musa
 import torch.nn.functional as F
 import math
 

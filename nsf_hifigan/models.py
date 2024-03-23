@@ -3,6 +3,7 @@ import json
 from .env import AttrDict
 import numpy as np
 import torch
+import torch_musa
 import torch.nn.functional as F
 import torch.nn as nn
 from torch.nn import Conv1d, ConvTranspose1d, AvgPool1d, Conv2d
@@ -12,7 +13,7 @@ from .utils import init_weights, get_padding
 LRELU_SLOPE = 0.1
 
 
-def load_model(model_path, device='cuda'):
+def load_model(model_path, device='musa'):
     h = load_config(model_path)
 
     generator = Generator(h).to(device)

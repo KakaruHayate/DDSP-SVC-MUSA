@@ -25,10 +25,10 @@ class WebUI:
                     self.sampling_rate=gr.Number(value=44100,label='采样率',info='数据集音频的采样率',interactive=True)
                     self.n_spk=gr.Number(value=1,label='说话人数量',interactive=True)
                 with gr.Row():
-                    self.device=gr.Dropdown(['cuda','cpu'],value='cuda',label='使用设备',interactive=True)
+                    self.device=gr.Dropdown(['musa','cpu'],value='musa',label='使用设备',interactive=True)
                     self.num_workers=gr.Number(value=2,label='读取数据进程数',info='如果你的设备性能很好，可以设置为0',interactive=True)
                     self.cache_all_data=gr.Checkbox(value=True,label='启用缓存',info='将数据全部加载以加速训练',interactive=True)
-                    self.cache_device=gr.Dropdown(['cuda','cpu'],value='cuda',type='value',label='缓存设备',info='如果你的显存比较大，设置为cuda',interactive=True)
+                    self.cache_device=gr.Dropdown(['musa','cpu'],value='musa',type='value',label='缓存设备',info='如果你的显存比较大，设置为musa',interactive=True)
                 self.bt_create_config=gr.Button(value='创建配置文件')
                 
                 gr.Markdown('## 预处理')

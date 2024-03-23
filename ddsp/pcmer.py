@@ -1,4 +1,5 @@
 import torch
+import torch_musa
 
 from torch import nn
 import math

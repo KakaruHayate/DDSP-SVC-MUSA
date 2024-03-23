@@ -24,3 +24,4 @@ wave
 pysimplegui
 sounddevice
 gradio
+torchaudio==2.0.1

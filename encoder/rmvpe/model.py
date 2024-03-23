@@ -1,4 +1,5 @@
 import torch
+import torch_musa
 from torch import nn
 from .deepunet import DeepUnet, DeepUnet0
 from .constants import *

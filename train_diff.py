@@ -1,6 +1,7 @@
 import os
 import argparse
 import torch
+import torch_musa
 from torch.optim import lr_scheduler
 from logger import utils
 from diffusion.data_loaders import get_data_loaders
@@ -80,8 +81,8 @@ if __name__ == '__main__':
     scheduler = lr_scheduler.StepLR(optimizer, step_size=args.train.decay_step, gamma=args.train.gamma, last_epoch=initial_global_step-2)
     
     # device
-    if args.device == 'cuda':
-        torch.cuda.set_device(args.env.gpu_id)
+    if args.device == 'musa':
+        torch.musa.set_device(args.env.gpu_id)
     model.to(args.device)
     
     for state in optimizer.state.values():

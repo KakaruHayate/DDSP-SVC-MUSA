@@ -1,6 +1,7 @@
 import io
 import logging
 import torch
+import torch_musa
 import numpy as np
 import slicer
 import soundfile as sf
@@ -58,7 +59,7 @@ class SvcDDSP:
         self.f0_min = f0_min
         self.f0_max = f0_max
         self.threhold = threhold
-        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.device = 'musa' if torch.musa.is_available() else 'cpu'
         self.spk_id = spk_id
         self.spk_mix_dict = spk_mix_dict
         self.enable_spk_id_cover = enable_spk_id_cover

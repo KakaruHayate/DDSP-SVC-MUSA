@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+import torch_musa
 import torch.nn.functional as F
 from diffusion.vocoder import load_model_vocoder
 
@@ -10,7 +11,7 @@ class DiffGtMel:
         if device is not None:
             self.device = device
         else:
-            self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+            self.device = 'musa' if torch.musa.is_available() else 'cpu'
         self.model = None
         self.vocoder = None
         self.args = None

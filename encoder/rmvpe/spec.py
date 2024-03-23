@@ -1,4 +1,5 @@
 import torch
+import torch_musa
 import numpy as np
 import torch.nn.functional as F
 from librosa.filters import mel

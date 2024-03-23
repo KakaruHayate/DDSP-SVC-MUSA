@@ -2,6 +2,7 @@ import math
 from typing import Optional
 
 import torch
+import torch_musa
 import torch.nn.functional as F
 from torch import nn
 from .model_conformer_naive import ConformerConvModule

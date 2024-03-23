@@ -2,6 +2,7 @@ import os
 import pathlib
 
 import torch
+import torch_musa
 import librosa
 import argparse
 import numpy as np
@@ -105,7 +106,7 @@ def parse_args(args=None, namespace=None):
         type=str,
         default=None,
         required=False,
-        help="cpu or cuda, auto if not set")
+        help="cpu or musa, auto if not set")
     parser.add_argument(
         "-i",
         "--input",
@@ -371,7 +372,7 @@ if __name__ == '__main__':
     # device
     device = cmd.device
     if device is None:
-        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        device = 'musa' if torch.musa.is_available() else 'cpu'
 
     extensions = cmd.extensions
 

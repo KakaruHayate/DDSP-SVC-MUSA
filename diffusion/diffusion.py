@@ -5,6 +5,7 @@ import torch.nn.functional as F
 import librosa.sequence
 import numpy as np
 import torch
+import torch_musa
 from torch import nn
 from tqdm import tqdm
 

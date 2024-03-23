@@ -8,6 +8,7 @@ import time
 import yaml
 import datetime
 import torch
+import torch_musa
 import matplotlib.pyplot as plt
 from . import utils
 from torch.utils.tensorboard import SummaryWriter

@@ -2,6 +2,7 @@ from diffusion_onnx import GaussianDiffusion
 import os
 import yaml
 import torch
+import torch_musa
 import torch.nn as nn
 import numpy as np
 from wavenet import WaveNet
