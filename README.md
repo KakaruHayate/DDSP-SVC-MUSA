@@ -1,4 +1,4 @@
-关于musa：NSF不支持，散了吧，跑不了，等MUSA更新
+关于musa：DDSP有部分不支持，散了吧，跑不了，等MUSA更新
 
 Language: **English** [简体中文](./cn_README.md) [한국어（outdated）](./ko_README.md)
 
