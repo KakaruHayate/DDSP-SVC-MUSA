@@ -8,6 +8,7 @@ from logger import utils
 from torch import autocast
 from torch.cuda.amp import GradScaler
 from nsf_hifigan.nvSTFT import STFT
+from reflow.ssim import calculate_ssim
 
 def calculate_mel_snr(gt_mel, pred_mel):
     # 计算误差图像
@@ -47,6 +48,15 @@ def calculate_mel_psnr(gt_mel, pred_mel):
     psnr = 10 * torch.log10(max_power / mse)
     return psnr
 
+def calculate_mel_ssim(gt_mel, pred_mel):
+    # B × M × T
+    pred_mel = pred_mel.transpose(-1, -2)
+    pred_mel = pred_mel[:, None]
+    gt_mel = gt_mel.transpose(-1, -2)
+    gt_mel = gt_mel[:, None]
+    ssim = calculate_ssim(pred_mel, gt_mel, size_average=True)
+    return ssim
+
 def test(args, model, vocoder, loader_test, saver):
     print(' [*] testing...')
     model.eval()
@@ -61,6 +71,7 @@ def test(args, model, vocoder, loader_test, saver):
     mel_val_snr_all = 0
     mel_val_psnr_all = 0
     mel_val_sisnr_all = 0
+    mel_val_ssim_all = 0
 
     # intialization
     num_batches = len(loader_test)
@@ -157,6 +168,7 @@ def test(args, model, vocoder, loader_test, saver):
             mel_val_snr_all += calculate_mel_snr(gt_mel_norm, pre_mel_norm).detach().cpu().numpy()
             mel_val_psnr_all += calculate_mel_psnr(gt_mel_norm, pre_mel_norm).detach().cpu().numpy()
             mel_val_sisnr_all += calculate_mel_si_snr(gt_mel_norm, pre_mel_norm).detach().cpu().numpy()
+            mel_val_ssim_all += calculate_mel_ssim(gt_mel_norm, pre_mel_norm).detach().cpu().numpy()
             mel_val_mse_all_num += 1
             
     # report
@@ -166,6 +178,7 @@ def test(args, model, vocoder, loader_test, saver):
     mel_val_snr_all /= mel_val_mse_all_num
     mel_val_psnr_all /= mel_val_mse_all_num
     mel_val_sisnr_all /= mel_val_mse_all_num
+    mel_val_ssim_all /= mel_val_mse_all_num
 
     # check
     print(' [test_ddsp_loss] test_ddsp_loss:', test_ddsp_loss)
@@ -186,6 +199,10 @@ def test(args, model, vocoder, loader_test, saver):
     print(' Mel Val SI-SNR', mel_val_sisnr_all)
     saver.log_value({
         'validation/mel_val_sisnr': mel_val_sisnr_all
+    })
+    print(' Mel Val SSIM', mel_val_ssim_all)
+    saver.log_value({
+        'validation/mel_val_ssim': mel_val_ssim_all
     })
     return test_ddsp_loss, test_reflow_loss
 
